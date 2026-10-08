@@ -118,7 +118,8 @@ export const ProcessesPage = () => {
   const actions = (
     <>
       <Button
-        variant="outlined"
+        variant="contained"
+        color="secondary"
         size="small"
         startIcon={<RefreshIcon />}
         onClick={handleRefresh}

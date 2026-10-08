@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { createTheme, alpha } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
@@ -306,6 +306,31 @@ export const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        ':root': {
+          '--zb-brand': colors.primary,
+          '--zb-brand-dark': colors.primaryDark,
+          '--zb-brand-light': colors.primaryLight,
+          '--zb-brand-bg': colors.primaryBg,
+          '--zb-brand-glow': 'rgba(16, 188, 105, 0.1)',
+          '--zb-page-background': colors.bgWhite,
+          '--zb-table-row-hover': colors.bgHover,
+          '--zb-button-radius': '8px',
+          '--zb-button-primary': colors.primary,
+          '--zb-button-primary-hover': colors.primaryDark,
+          '--zb-button-primary-text': '#ffffff',
+          '--zb-button-secondary': colors.dark,
+          '--zb-button-secondary-hover': colors.darkHover,
+          '--zb-button-secondary-text': '#ffffff',
+          '--zb-button-secondary-border': colors.dark,
+          '--zb-button-secondary-hover-border': colors.darkHover,
+          '--zb-button-delete': colors.error,
+          '--zb-button-delete-hover': '#b91c1c',
+          '--zb-button-delete-text': '#ffffff',
+          '--zb-button-outlined-text': colors.textSecondary,
+          '--zb-button-outlined-border': colors.borderDark,
+          '--zb-button-outlined-hover': colors.bgGray,
+          '--zb-button-outlined-hover-border': colors.textSecondary,
+        },
         body: {
           backgroundColor: colors.bgWhite,
         },
@@ -340,7 +365,7 @@ export const theme = createTheme({
         root: {
           textTransform: 'none',
           fontWeight: 500,
-          borderRadius: 8,
+          borderRadius: 'var(--zb-button-radius)',
           padding: '10px 20px',
           fontSize: '0.875rem',
           boxShadow: 'none',
@@ -350,46 +375,44 @@ export const theme = createTheme({
         },
         contained: {
           '&.MuiButton-containedPrimary': {
-            backgroundColor: colors.primary,
+            backgroundColor: 'var(--zb-button-primary)',
+            color: 'var(--zb-button-primary-text)',
             '&:hover': {
-              backgroundColor: colors.primaryDark,
+              backgroundColor: 'var(--zb-button-primary-hover)',
             },
           },
           '&.MuiButton-containedSecondary': {
-            backgroundColor: colors.dark,
+            backgroundColor: 'var(--zb-button-secondary)',
+            color: 'var(--zb-button-secondary-text)',
+            border: '1px solid var(--zb-button-secondary-border)',
             '&:hover': {
-              backgroundColor: colors.darkHover,
+              backgroundColor: 'var(--zb-button-secondary-hover)',
+              borderColor: 'var(--zb-button-secondary-hover-border)',
+            },
+          },
+          '&.MuiButton-containedError': {
+            backgroundColor: 'var(--zb-button-delete)',
+            color: 'var(--zb-button-delete-text)',
+            '&:hover': {
+              backgroundColor: 'var(--zb-button-delete-hover)',
             },
           },
         },
         outlined: {
-          borderColor: colors.borderDark,
+          color: 'var(--zb-button-outlined-text)',
+          borderColor: 'var(--zb-button-outlined-border)',
           '&:hover': {
-            backgroundColor: colors.bgGray,
+            color: 'var(--zb-button-outlined-text)',
+            backgroundColor: 'var(--zb-button-outlined-hover)',
+            borderColor: 'var(--zb-button-outlined-hover-border)',
           },
-          '&.MuiButton-outlinedPrimary': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
+          '&.MuiButton-outlinedPrimary, &.MuiButton-outlinedSecondary, &.MuiButton-outlinedInherit': {
+            color: 'var(--zb-button-outlined-text)',
+            borderColor: 'var(--zb-button-outlined-border)',
             '&:hover': {
-              color: colors.textPrimary,
-              borderColor: colors.textSecondary,
-              backgroundColor: colors.bgGray,
-            },
-          },
-          '&.MuiButton-outlinedSecondary': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
-            '&:hover': {
-              borderColor: colors.borderDark,
-              backgroundColor: colors.bgGray,
-            },
-          },
-          '&.MuiButton-outlinedInherit': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
-            '&:hover': {
-              borderColor: colors.borderDark,
-              backgroundColor: colors.bgGray,
+              color: 'var(--zb-button-outlined-text)',
+              borderColor: 'var(--zb-button-outlined-hover-border)',
+              backgroundColor: 'var(--zb-button-outlined-hover)',
             },
           },
         },
@@ -402,7 +425,7 @@ export const theme = createTheme({
         sizeSmall: {
           padding: '6px 12px',
           fontSize: '0.75rem',
-          borderRadius: 6,
+          borderRadius: 'var(--zb-button-radius)',
         },
       },
     },
@@ -412,6 +435,9 @@ export const theme = createTheme({
           color: colors.textMuted,
           '&:hover': {
             backgroundColor: colors.bgGray,
+          },
+          '&.MuiIconButton-colorError': {
+            color: 'var(--zb-button-delete)',
           },
         },
       },
@@ -502,7 +528,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '&:hover': {
-            backgroundColor: colors.bgHover,
+            backgroundColor: 'var(--zb-table-row-hover)',
           },
           '&:last-child td': {
             borderBottom: 'none',
@@ -561,9 +587,9 @@ export const theme = createTheme({
               borderColor: colors.borderDark,
             },
             '&.Mui-focused fieldset': {
-              borderColor: colors.primary,
+              borderColor: 'var(--zb-brand)',
               borderWidth: 1,
-              boxShadow: `0 0 0 3px ${alpha(colors.primary, 0.1)}`,
+              boxShadow: '0 0 0 3px var(--zb-brand-glow)',
             },
           },
           '& .MuiInputBase-input': {
@@ -588,9 +614,9 @@ export const theme = createTheme({
             borderColor: colors.borderDark,
           },
           '&.Mui-focused fieldset': {
-            borderColor: colors.primary,
+            borderColor: 'var(--zb-brand)',
             borderWidth: 1,
-            boxShadow: `0 0 0 3px ${alpha(colors.primary, 0.1)}`,
+            boxShadow: '0 0 0 3px var(--zb-brand-glow)',
           },
         },
         input: {
@@ -617,7 +643,7 @@ export const theme = createTheme({
         root: {
           color: colors.borderDark,
           '&.Mui-checked': {
-            color: colors.primary,
+            color: 'var(--zb-brand)',
           },
         },
       },
@@ -644,7 +670,7 @@ export const theme = createTheme({
         },
         indicator: {
           height: 2,
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
         },
       },
     },
@@ -743,7 +769,7 @@ export const theme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-          color: colors.primary,
+          color: 'var(--zb-brand)',
           textDecoration: 'none',
           fontWeight: 500,
           '&:hover': {
@@ -759,7 +785,7 @@ export const theme = createTheme({
           height: 32,
           fontSize: '0.75rem',
           fontWeight: 600,
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           color: colors.bgWhite,
         },
       },
@@ -826,7 +852,7 @@ export const theme = createTheme({
           borderRadius: 4,
         },
         bar: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           borderRadius: 4,
         },
       },
@@ -847,9 +873,9 @@ export const theme = createTheme({
           },
         },
         primary: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           '&:hover': {
-            backgroundColor: colors.primaryDark,
+            backgroundColor: 'var(--zb-brand-dark)',
           },
         },
         secondary: {
@@ -878,9 +904,9 @@ export const theme = createTheme({
             backgroundColor: colors.bgHover,
           },
           '&.Mui-selected': {
-            backgroundColor: colors.primaryBg,
+            backgroundColor: 'var(--zb-brand-bg)',
             '&:hover': {
-              backgroundColor: colors.primaryBg,
+              backgroundColor: 'var(--zb-brand-bg)',
             },
           },
         },
