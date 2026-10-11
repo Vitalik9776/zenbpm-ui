@@ -12,8 +12,14 @@ import {
 const HEX_COLOR = /^#[0-9a-fA-F]{6}$/;
 const RGBA_COLOR = /^rgba\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*(?:0|1|0?\.\d+)\s*\)$/;
 
-const isColor = (value: unknown): value is string =>
-  typeof value === 'string' && (value === 'transparent' || HEX_COLOR.test(value) || RGBA_COLOR.test(value));
+const isOpaqueParsableColor = (value: unknown): value is string =>
+  typeof value === 'string' && (HEX_COLOR.test(value) || RGBA_COLOR.test(value));
+
+/** `transparent` is valid CSS for hover and background fills, but MUI cannot decompose it. */
+const allowsTransparent = (key: BrandingColorKey) => key.includes('Hover') || key.includes('Background');
+
+const isColor = (key: BrandingColorKey, value: unknown): value is string =>
+  isOpaqueParsableColor(value) || (value === 'transparent' && allowsTransparent(key));
 
 const isSize = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 96;
@@ -30,7 +36,11 @@ const normalize = (parsed: Partial<Branding> & { logo?: unknown }): Branding => 
   const colors = {} as Pick<Branding, BrandingColorKey>;
   for (const key of brandingColorKeys) {
     const value = parsed[key];
-    colors[key] = isColor(value) ? value : defaultBranding[key];
+    colors[key] = isColor(key, value) ? value : defaultBranding[key];
+  }
+
+  if (!isOpaqueParsableColor(colors.brandColor)) {
+    colors.brandColor = defaultBranding.brandColor;
   }
 
   const sizes = {} as Pick<Branding, BrandingSizeKey>;

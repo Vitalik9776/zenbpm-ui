@@ -326,6 +326,16 @@ export const MainLayout = () => {
               role={user ? 'button' : undefined}
               tabIndex={user ? 0 : undefined}
               onClick={user ? (event) => setUserMenuAnchor(event.currentTarget) : undefined}
+              onKeyDown={
+                user
+                  ? (event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        setUserMenuAnchor(event.currentTarget);
+                      }
+                    }
+                  : undefined
+              }
               sx={{
                 width: 32,
                 height: 32,
