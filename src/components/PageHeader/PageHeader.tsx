@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import { themeColors } from '../../base/theme';
 
 export interface PageHeaderProps {
   title: string;
@@ -24,10 +23,10 @@ export const PageHeader = ({ title, subtitle, actions, children }: PageHeaderPro
             variant="h1"
             component="h1"
             sx={{
-              fontSize: '1.75rem',
-              fontWeight: 700,
+              fontSize: 'var(--zb-page-title-size)',
+              fontWeight: 'var(--zb-page-title-weight)',
               letterSpacing: '-0.5px',
-              color: themeColors.textPrimary,
+              color: 'var(--zb-text-primary)',
             }}
           >
             {title}
@@ -38,8 +37,8 @@ export const PageHeader = ({ title, subtitle, actions, children }: PageHeaderPro
           <Typography
             sx={{
               mt: 0.75,
-              fontSize: '0.875rem',
-              color: themeColors.textMuted,
+              fontSize: 'var(--zb-body-font-size)',
+              color: 'var(--zb-text-muted)',
             }}
           >
             {subtitle}

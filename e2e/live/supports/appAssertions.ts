@@ -48,13 +48,12 @@ export async function expectManagementActions(
     ? [
         ['refresh-button', 'Refresh'],
         ['upload-button', 'Upload BPMN'],
-        ['design-button', 'Design Process'],
-        ['start-instance-button', 'Start Instance'],
+        ['design-button', 'New Process'],
       ]
     : [
         ['refresh-button', 'Refresh'],
         ['upload-button', 'Upload DMN'],
-        ['design-button', 'Design Decision'],
+        ['design-button', 'New Decision'],
       ];
 
   for (const [testId, label] of actions) {

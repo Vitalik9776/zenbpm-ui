@@ -227,76 +227,76 @@ export const theme = createTheme({
       'sans-serif',
     ].join(','),
     h1: {
-      fontWeight: 700,
-      fontSize: '2rem',
+      fontWeight: 'var(--zb-page-title-weight)',
+      fontSize: 'var(--zb-page-title-size)',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h2: {
       fontWeight: 700,
       fontSize: '1.75rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h3: {
       fontWeight: 700,
       fontSize: '1.5rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h4: {
       fontWeight: 700,
       fontSize: '1.25rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h5: {
       fontWeight: 600,
       fontSize: '1rem',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h6: {
       fontWeight: 600,
       fontSize: '0.875rem',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     body1: {
-      fontSize: '0.875rem',
-      color: colors.textPrimary,
+      fontSize: 'var(--zb-body-font-size)',
+      color: 'var(--zb-text-primary)',
     },
     body2: {
-      fontSize: '0.8125rem',
-      color: colors.textSecondary,
+      fontSize: 'var(--zb-small-font-size)',
+      color: 'var(--zb-text-secondary)',
     },
     subtitle1: {
       fontSize: '0.875rem',
       fontWeight: 500,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
     },
     subtitle2: {
       fontSize: '0.75rem',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
     },
     caption: {
-      fontSize: '0.6875rem',
+      fontSize: 'var(--zb-caption-font-size)',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
     },
     captionNormal: {
-      fontSize: '0.6875rem',
+      fontSize: 'var(--zb-caption-font-size)',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'none',
       letterSpacing: '0.5px',
     },
     button: {
-      fontWeight: 500,
-      fontSize: '0.875rem',
+      fontWeight: 'var(--zb-button-font-weight)',
+      fontSize: 'var(--zb-button-font-size)',
       textTransform: 'none',
     },
   },
@@ -314,6 +314,33 @@ export const theme = createTheme({
           '--zb-brand-glow': 'rgba(16, 188, 105, 0.1)',
           '--zb-page-background': colors.bgWhite,
           '--zb-table-row-hover': colors.bgHover,
+          '--zb-table-header': colors.bgLight,
+          '--zb-table-header-text': colors.textMuted,
+          '--zb-table-border': colors.borderLight,
+          '--zb-text-muted': colors.textMuted,
+          '--zb-text-primary': colors.textPrimary,
+          '--zb-text-secondary': colors.textSecondary,
+          '--zb-font-size': '16px',
+          '--zb-button-font-size': '14px',
+          '--zb-button-small-font-size': '12px',
+          '--zb-button-font-weight': '500',
+          '--zb-page-title-size': '28px',
+          '--zb-page-title-weight': '700',
+          '--zb-body-font-size': '14px',
+          '--zb-small-font-size': '13px',
+          '--zb-caption-font-size': '11px',
+          '--zb-table-font-size': '13px',
+          '--zb-table-header-font-size': '11px',
+          '--zb-badge-success': colors.primary,
+          '--zb-badge-success-text': '#ffffff',
+          '--zb-badge-danger': colors.error,
+          '--zb-badge-danger-text': '#ffffff',
+          '--zb-badge-neutral': '#eeeeee',
+          '--zb-badge-neutral-text': colors.textSecondary,
+          '--zb-badge-soft': colors.successBg,
+          '--zb-badge-soft-text': colors.successText,
+          '--zb-pagination-selected': colors.primary,
+          '--zb-pagination-selected-text': '#ffffff',
           '--zb-button-radius': '8px',
           '--zb-button-primary': colors.primary,
           '--zb-button-primary-hover': colors.primaryDark,
@@ -340,7 +367,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.bgWhite,
-          color: colors.textPrimary,
+          color: 'var(--zb-text-primary)',
           boxShadow: 'none',
           borderBottom: `1px solid ${colors.borderLight}`,
         },
@@ -364,30 +391,32 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
-          fontWeight: 500,
+          fontWeight: 'var(--zb-button-font-weight)',
           borderRadius: 'var(--zb-button-radius)',
           padding: '10px 20px',
-          fontSize: '0.875rem',
+          fontSize: 'var(--zb-button-font-size)',
           boxShadow: 'none',
           '&:hover': {
             boxShadow: 'none',
           },
         },
         contained: {
-          '&.MuiButton-containedPrimary': {
+          '&.MuiButton-containedPrimary, &.MuiButton-colorPrimary': {
             backgroundColor: 'var(--zb-button-primary)',
             color: 'var(--zb-button-primary-text)',
             '&:hover': {
               backgroundColor: 'var(--zb-button-primary-hover)',
+              color: 'var(--zb-button-primary-text)',
             },
           },
-          '&.MuiButton-containedSecondary': {
+          '&.MuiButton-containedSecondary, &.MuiButton-colorSecondary': {
             backgroundColor: 'var(--zb-button-secondary)',
             color: 'var(--zb-button-secondary-text)',
             border: '1px solid var(--zb-button-secondary-border)',
             '&:hover': {
               backgroundColor: 'var(--zb-button-secondary-hover)',
               borderColor: 'var(--zb-button-secondary-hover-border)',
+              color: 'var(--zb-button-secondary-text)',
             },
           },
           '&.MuiButton-containedError': {
@@ -424,7 +453,7 @@ export const theme = createTheme({
         },
         sizeSmall: {
           padding: '6px 12px',
-          fontSize: '0.75rem',
+          fontSize: 'var(--zb-button-small-font-size)',
           borderRadius: 'var(--zb-button-radius)',
         },
       },
@@ -432,7 +461,7 @@ export const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
           '&:hover': {
             backgroundColor: colors.bgGray,
           },
@@ -475,7 +504,7 @@ export const theme = createTheme({
         title: {
           fontSize: '0.875rem',
           fontWeight: 600,
-          color: colors.textPrimary,
+          color: 'var(--zb-text-primary)',
         },
       },
     },
@@ -509,18 +538,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: '16px 20px',
-          fontSize: '0.8125rem',
-          borderBottom: `1px solid ${colors.bgGray}`,
+          fontSize: 'var(--zb-table-font-size)',
+          borderBottom: '1px solid var(--zb-table-border)',
         },
         head: {
           fontWeight: 600,
-          fontSize: '0.6875rem',
+          fontSize: 'var(--zb-table-header-font-size)',
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
-          color: colors.textMuted,
-          backgroundColor: colors.bgLight,
+          color: 'var(--zb-table-header-text)',
+          backgroundColor: 'var(--zb-table-header)',
           padding: '14px 20px',
-          borderBottom: `1px solid ${colors.borderLight}`,
+          borderBottom: '1px solid var(--zb-table-border)',
         },
       },
     },
@@ -539,8 +568,8 @@ export const theme = createTheme({
     MuiTablePagination: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.bgLight,
-          borderTop: `1px solid ${colors.borderLight}`,
+          backgroundColor: 'var(--zb-table-header)',
+          borderTop: '1px solid var(--zb-table-border)',
         },
         toolbar: {
           padding: '16px 20px',
@@ -548,11 +577,24 @@ export const theme = createTheme({
         },
         selectLabel: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
         },
         displayedRows: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: 'var(--zb-pagination-selected)',
+            color: 'var(--zb-pagination-selected-text)',
+            '&:hover': {
+              backgroundColor: 'var(--zb-pagination-selected)',
+            },
+          },
         },
       },
     },
@@ -597,7 +639,7 @@ export const theme = createTheme({
             fontSize: '0.875rem',
           },
           '& .MuiInputBase-input::placeholder': {
-            color: colors.textMuted,
+            color: 'var(--zb-text-muted)',
             opacity: 1,
           },
         },
@@ -658,7 +700,7 @@ export const theme = createTheme({
           padding: '10px 20px',
           color: colors.textSecondary,
           '&.Mui-selected': {
-            color: colors.textPrimary,
+            color: 'var(--zb-text-primary)',
           },
         },
       },
@@ -687,7 +729,7 @@ export const theme = createTheme({
           backgroundColor: 'transparent',
           '&.Mui-selected': {
             backgroundColor: colors.bgWhite,
-            color: colors.textPrimary,
+            color: 'var(--zb-text-primary)',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             '&:hover': {
               backgroundColor: colors.bgWhite,
@@ -759,7 +801,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
         },
         separator: {
           margin: '0 8px',

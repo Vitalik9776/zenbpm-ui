@@ -37,6 +37,33 @@ export interface Branding {
   buttonRadius: number;
   pageBackground: string;
   tableRowHover: string;
+  tableHeaderBackground: string;
+  tableHeaderText: string;
+  tableBorder: string;
+  textMuted: string;
+  textPrimary: string;
+  textSecondary: string;
+  badgeSuccess: string;
+  badgeSuccessText: string;
+  badgeDanger: string;
+  badgeDangerText: string;
+  badgeNeutral: string;
+  badgeNeutralText: string;
+  badgeSoft: string;
+  badgeSoftText: string;
+  paginationSelected: string;
+  paginationSelectedText: string;
+  fontSize: number;
+  buttonFontSize: number;
+  buttonSmallFontSize: number;
+  buttonFontWeight: number;
+  pageTitleFontSize: number;
+  pageTitleFontWeight: number;
+  bodyFontSize: number;
+  smallFontSize: number;
+  captionFontSize: number;
+  tableFontSize: number;
+  tableHeaderFontSize: number;
   fontFamily: string;
   logoUrl: string | null;
 }
@@ -71,17 +98,53 @@ export const brandingColorKeys = [
   'buttonOutlinedHoverBorder',
   'pageBackground',
   'tableRowHover',
+  'tableHeaderBackground',
+  'tableHeaderText',
+  'tableBorder',
+  'textMuted',
+  'textPrimary',
+  'textSecondary',
+  'badgeSuccess',
+  'badgeSuccessText',
+  'badgeDanger',
+  'badgeDangerText',
+  'badgeNeutral',
+  'badgeNeutralText',
+  'badgeSoft',
+  'badgeSoftText',
+  'paginationSelected',
+  'paginationSelectedText',
 ] as const;
 
 export type BrandingColorKey = (typeof brandingColorKeys)[number];
 
-export const brandingNumberKeys = [
+export const brandingSizeKeys = [
   'menuRadius',
   'menuFontSize',
+  'buttonRadius',
+  'fontSize',
+  'buttonFontSize',
+  'buttonSmallFontSize',
+  'pageTitleFontSize',
+  'bodyFontSize',
+  'smallFontSize',
+  'captionFontSize',
+  'tableFontSize',
+  'tableHeaderFontSize',
+] as const;
+
+export type BrandingSizeKey = (typeof brandingSizeKeys)[number];
+
+export const brandingWeightKeys = [
   'menuFontWeight',
   'menuActiveFontWeight',
-  'buttonRadius',
+  'buttonFontWeight',
+  'pageTitleFontWeight',
 ] as const;
+
+export type BrandingWeightKey = (typeof brandingWeightKeys)[number];
+
+export const brandingNumberKeys = [...brandingSizeKeys, ...brandingWeightKeys] as const;
 
 export type BrandingNumberKey = (typeof brandingNumberKeys)[number];
 
@@ -121,6 +184,33 @@ export const defaultBranding: Branding = {
   buttonRadius: 8,
   pageBackground: '#ffffff',
   tableRowHover: '#fafafa',
+  tableHeaderBackground: '#fafafa',
+  tableHeaderText: '#888888',
+  tableBorder: '#f0f0f0',
+  textMuted: '#888888',
+  textPrimary: '#1a1a1a',
+  textSecondary: '#666666',
+  badgeSuccess: '#10bc69',
+  badgeSuccessText: '#ffffff',
+  badgeDanger: '#dc2626',
+  badgeDangerText: '#ffffff',
+  badgeNeutral: '#eeeeee',
+  badgeNeutralText: '#666666',
+  badgeSoft: '#e6f9f0',
+  badgeSoftText: '#0d9956',
+  paginationSelected: '#10bc69',
+  paginationSelectedText: '#ffffff',
+  fontSize: 16,
+  buttonFontSize: 14,
+  buttonSmallFontSize: 12,
+  buttonFontWeight: 500,
+  pageTitleFontSize: 28,
+  pageTitleFontWeight: 700,
+  bodyFontSize: 14,
+  smallFontSize: 13,
+  captionFontSize: 11,
+  tableFontSize: 13,
+  tableHeaderFontSize: 11,
   fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   logoUrl: null,
 };

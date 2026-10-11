@@ -50,16 +50,16 @@ export const SubTabs = ({ tabs, value, onChange, actions }: SubTabsProps) => {
               px: 1.5,
               py: 0.5,
               borderRadius: '6px',
-              fontSize: '0.8125rem',
+              fontSize: 'var(--zb-small-font-size)',
               fontWeight: 500,
               minWidth: 'auto',
               border: 'none',
               bgcolor: isActive ? themeColors.bgWhite : 'transparent',
-              color: isActive ? themeColors.textPrimary : themeColors.textSecondary,
+              color: isActive ? 'var(--zb-text-primary)' : 'var(--zb-text-secondary)',
               boxShadow: isActive ? `0 1px 3px ${themeColors.shadows.light}` : 'none',
               '&:hover': {
                 bgcolor: isActive ? themeColors.bgWhite : 'transparent',
-                color: themeColors.textPrimary,
+                color: 'var(--zb-text-primary)',
               },
             }}
           >

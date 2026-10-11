@@ -311,29 +311,9 @@ export const MainLayout = () => {
             )}
           </Box>
 
-          {/* Right section: Design button, reserved search space and Avatar */}
+          {/* Right section: reserved search space and Avatar */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
-            {/* Design Button */}
-            <Button
-              onClick={() => handleNavClick('/designer')}
-              sx={{
-                bgcolor: branding.buttonPrimary,
-                color: branding.buttonPrimaryText,
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                px: 2,
-                py: 0.75,
-                borderRadius: `${branding.buttonRadius}px`,
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: branding.buttonPrimaryHover,
-                },
-              }}
-            >
-              {t('navigation.design')}
-            </Button>
-
-            {/* Keep the Design button aligned while global search is unavailable. */}
+            {/* Keep header spacing while global search is unavailable. */}
             <Box
               aria-hidden="true"
               data-testid="header-search-spacer"

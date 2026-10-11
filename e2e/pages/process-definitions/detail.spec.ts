@@ -251,11 +251,6 @@ test.describe('Start Instance version selection', () => {
     );
   });
 
-  test('disables version selection until a process is selected', async ({ page }) => {
-    await page.goto('/processes');
-    await page.getByTestId('start-instance-button').click();
-    await expect(page.getByRole('dialog').getByTestId('version-selector')).toHaveClass(/Mui-disabled/);
-  });
 });
 
 test.describe('Process Definition Detail - Version Switching', () => {
