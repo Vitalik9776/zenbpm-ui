@@ -32,6 +32,30 @@ const FONT_FAMILY = /^[A-Za-z0-9 ,"'-]+$/;
 const isFontFamily = (value: unknown): value is string =>
   typeof value === 'string' && value.trim().length > 0 && value.trim().length <= 200 && FONT_FAMILY.test(value.trim());
 
+/**
+ * `branding.json` is served from the site root. A relative logo such as
+ * `./tenant-logo.svg` is resolved against that file, so the image URL stays
+ * valid on nested routes.
+ */
+const resolveLogoUrl = (logo: string): string | null => {
+  if (/^https?:\/\//i.test(logo)) {
+    return logo;
+  }
+  if (logo.startsWith('/') && !logo.startsWith('//')) {
+    return logo;
+  }
+  if (!logo.startsWith('./')) {
+    return null;
+  }
+
+  try {
+    const resolved = new URL(logo, 'https://branding.local/branding.json');
+    return `${resolved.pathname}${resolved.search}${resolved.hash}`;
+  } catch {
+    return null;
+  }
+};
+
 const normalize = (parsed: Partial<Branding> & { logo?: unknown }): Branding => {
   const colors = {} as Pick<Branding, BrandingColorKey>;
   for (const key of brandingColorKeys) {
@@ -56,7 +80,7 @@ const normalize = (parsed: Partial<Branding> & { logo?: unknown }): Branding => 
   }
 
   const logo = typeof parsed.logo === 'string' ? parsed.logo.trim() : 'default';
-  const logoUrl = logo.startsWith('/') || logo.startsWith('./') || /^https?:\/\//i.test(logo) ? logo : null;
+  const logoUrl = resolveLogoUrl(logo);
 
   return {
     ...colors,

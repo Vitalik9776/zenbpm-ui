@@ -178,7 +178,7 @@ export const MainLayout = () => {
   // Mobile drawer content
   const mobileDrawerContent = (
     <Box sx={{ width: 280 }}>
-      <Toolbar sx={{ px: 2.5 }}>
+      <Toolbar sx={{ px: 2.5, bgcolor: headerBackground, color: headerTextColor }}>
         <Logo onClick={handleLogoClick} {...logoProps} />
       </Toolbar>
       <List>
@@ -201,30 +201,28 @@ export const MainLayout = () => {
                 '&.Mui-selected': {
                   bgcolor: branding.menuActiveBackground,
                   color: branding.menuActiveColor,
-                  '& .MuiListItemIcon-root': {
-                    color: branding.menuActiveColor,
-                  },
                   '&:hover': {
                     bgcolor: branding.menuActiveHoverBackground,
                     color: branding.menuActiveHoverColor,
                   },
                 },
+                '& .MuiListItemIcon-root, & .MuiTypography-root': {
+                  color: 'inherit',
+                },
               }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 40,
-                  color: isActivePath(item.path) ? branding.menuActiveColor : branding.menuInactiveColor,
-                }}
-              >
+              <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText
                 primary={t(item.labelKey)}
                 slotProps={{
                   primary: {
-                    fontSize: `${branding.menuFontSize}px`,
-                    fontWeight: isActivePath(item.path) ? branding.menuActiveFontWeight : branding.menuFontWeight,
+                    sx: {
+                      fontSize: `${branding.menuFontSize}px`,
+                      fontWeight: isActivePath(item.path) ? branding.menuActiveFontWeight : branding.menuFontWeight,
+                      color: 'inherit',
+                    },
                   },
                 }}
               />

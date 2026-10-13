@@ -401,7 +401,7 @@ export const theme = createTheme({
           },
         },
         contained: {
-          '&.MuiButton-containedPrimary, &.MuiButton-colorPrimary': {
+          '&.MuiButton-containedPrimary:not(.Mui-disabled), &.MuiButton-colorPrimary:not(.Mui-disabled)': {
             backgroundColor: 'var(--zb-button-primary)',
             color: 'var(--zb-button-primary-text)',
             '&:hover': {
@@ -409,7 +409,7 @@ export const theme = createTheme({
               color: 'var(--zb-button-primary-text)',
             },
           },
-          '&.MuiButton-containedSecondary, &.MuiButton-colorSecondary': {
+          '&.MuiButton-containedSecondary:not(.Mui-disabled), &.MuiButton-colorSecondary:not(.Mui-disabled)': {
             backgroundColor: 'var(--zb-button-secondary)',
             color: 'var(--zb-button-secondary-text)',
             border: '1px solid var(--zb-button-secondary-border)',
@@ -419,7 +419,7 @@ export const theme = createTheme({
               color: 'var(--zb-button-secondary-text)',
             },
           },
-          '&.MuiButton-containedError': {
+          '&.MuiButton-containedError:not(.Mui-disabled)': {
             backgroundColor: 'var(--zb-button-delete)',
             color: 'var(--zb-button-delete-text)',
             '&:hover': {
@@ -428,14 +428,16 @@ export const theme = createTheme({
           },
         },
         outlined: {
-          color: 'var(--zb-button-outlined-text)',
-          borderColor: 'var(--zb-button-outlined-border)',
-          '&:hover': {
+          '&:not(.Mui-disabled)': {
             color: 'var(--zb-button-outlined-text)',
-            backgroundColor: 'var(--zb-button-outlined-hover)',
-            borderColor: 'var(--zb-button-outlined-hover-border)',
+            borderColor: 'var(--zb-button-outlined-border)',
+            '&:hover': {
+              color: 'var(--zb-button-outlined-text)',
+              backgroundColor: 'var(--zb-button-outlined-hover)',
+              borderColor: 'var(--zb-button-outlined-hover-border)',
+            },
           },
-          '&.MuiButton-outlinedPrimary, &.MuiButton-outlinedSecondary, &.MuiButton-outlinedInherit': {
+          '&.MuiButton-outlinedPrimary:not(.Mui-disabled), &.MuiButton-outlinedSecondary:not(.Mui-disabled), &.MuiButton-outlinedInherit:not(.Mui-disabled)': {
             color: 'var(--zb-button-outlined-text)',
             borderColor: 'var(--zb-button-outlined-border)',
             '&:hover': {
