@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { createTheme, alpha } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
@@ -227,76 +227,76 @@ export const theme = createTheme({
       'sans-serif',
     ].join(','),
     h1: {
-      fontWeight: 700,
-      fontSize: '2rem',
+      fontWeight: 'var(--zb-page-title-weight)',
+      fontSize: 'var(--zb-page-title-size)',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h2: {
       fontWeight: 700,
       fontSize: '1.75rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h3: {
       fontWeight: 700,
       fontSize: '1.5rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h4: {
       fontWeight: 700,
       fontSize: '1.25rem',
       letterSpacing: '-0.5px',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h5: {
       fontWeight: 600,
       fontSize: '1rem',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     h6: {
       fontWeight: 600,
       fontSize: '0.875rem',
-      color: colors.textPrimary,
+      color: 'var(--zb-text-primary)',
     },
     body1: {
-      fontSize: '0.875rem',
-      color: colors.textPrimary,
+      fontSize: 'var(--zb-body-font-size)',
+      color: 'var(--zb-text-primary)',
     },
     body2: {
-      fontSize: '0.8125rem',
-      color: colors.textSecondary,
+      fontSize: 'var(--zb-small-font-size)',
+      color: 'var(--zb-text-secondary)',
     },
     subtitle1: {
       fontSize: '0.875rem',
       fontWeight: 500,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
     },
     subtitle2: {
       fontSize: '0.75rem',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
     },
     caption: {
-      fontSize: '0.6875rem',
+      fontSize: 'var(--zb-caption-font-size)',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
     },
     captionNormal: {
-      fontSize: '0.6875rem',
+      fontSize: 'var(--zb-caption-font-size)',
       fontWeight: 600,
-      color: colors.textMuted,
+      color: 'var(--zb-text-muted)',
       textTransform: 'none',
       letterSpacing: '0.5px',
     },
     button: {
-      fontWeight: 500,
-      fontSize: '0.875rem',
+      fontWeight: 'var(--zb-button-font-weight)',
+      fontSize: 'var(--zb-button-font-size)',
       textTransform: 'none',
     },
   },
@@ -306,6 +306,58 @@ export const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        ':root': {
+          '--zb-brand': colors.primary,
+          '--zb-brand-dark': colors.primaryDark,
+          '--zb-brand-light': colors.primaryLight,
+          '--zb-brand-bg': colors.primaryBg,
+          '--zb-brand-glow': 'rgba(16, 188, 105, 0.1)',
+          '--zb-page-background': colors.bgWhite,
+          '--zb-table-row-hover': colors.bgHover,
+          '--zb-table-header': colors.bgLight,
+          '--zb-table-header-text': colors.textMuted,
+          '--zb-table-border': colors.borderLight,
+          '--zb-text-muted': colors.textMuted,
+          '--zb-text-primary': colors.textPrimary,
+          '--zb-text-secondary': colors.textSecondary,
+          '--zb-font-size': '16px',
+          '--zb-button-font-size': '14px',
+          '--zb-button-small-font-size': '12px',
+          '--zb-button-font-weight': '500',
+          '--zb-page-title-size': '28px',
+          '--zb-page-title-weight': '700',
+          '--zb-body-font-size': '14px',
+          '--zb-small-font-size': '13px',
+          '--zb-caption-font-size': '11px',
+          '--zb-table-font-size': '13px',
+          '--zb-table-header-font-size': '11px',
+          '--zb-badge-success': colors.primary,
+          '--zb-badge-success-text': '#ffffff',
+          '--zb-badge-danger': colors.error,
+          '--zb-badge-danger-text': '#ffffff',
+          '--zb-badge-neutral': '#eeeeee',
+          '--zb-badge-neutral-text': colors.textSecondary,
+          '--zb-badge-soft': colors.successBg,
+          '--zb-badge-soft-text': colors.successText,
+          '--zb-pagination-selected': colors.primary,
+          '--zb-pagination-selected-text': '#ffffff',
+          '--zb-button-radius': '8px',
+          '--zb-button-primary': colors.primary,
+          '--zb-button-primary-hover': colors.primaryDark,
+          '--zb-button-primary-text': '#ffffff',
+          '--zb-button-secondary': colors.dark,
+          '--zb-button-secondary-hover': colors.darkHover,
+          '--zb-button-secondary-text': '#ffffff',
+          '--zb-button-secondary-border': colors.dark,
+          '--zb-button-secondary-hover-border': colors.darkHover,
+          '--zb-button-delete': colors.error,
+          '--zb-button-delete-hover': '#b91c1c',
+          '--zb-button-delete-text': '#ffffff',
+          '--zb-button-outlined-text': colors.textSecondary,
+          '--zb-button-outlined-border': colors.borderDark,
+          '--zb-button-outlined-hover': colors.bgGray,
+          '--zb-button-outlined-hover-border': colors.textSecondary,
+        },
         body: {
           backgroundColor: colors.bgWhite,
         },
@@ -315,7 +367,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.bgWhite,
-          color: colors.textPrimary,
+          color: 'var(--zb-text-primary)',
           boxShadow: 'none',
           borderBottom: `1px solid ${colors.borderLight}`,
         },
@@ -339,57 +391,59 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
-          fontWeight: 500,
-          borderRadius: 8,
+          fontWeight: 'var(--zb-button-font-weight)',
+          borderRadius: 'var(--zb-button-radius)',
           padding: '10px 20px',
-          fontSize: '0.875rem',
+          fontSize: 'var(--zb-button-font-size)',
           boxShadow: 'none',
           '&:hover': {
             boxShadow: 'none',
           },
         },
         contained: {
-          '&.MuiButton-containedPrimary': {
-            backgroundColor: colors.primary,
+          '&.MuiButton-containedPrimary:not(.Mui-disabled), &.MuiButton-colorPrimary:not(.Mui-disabled)': {
+            backgroundColor: 'var(--zb-button-primary)',
+            color: 'var(--zb-button-primary-text)',
             '&:hover': {
-              backgroundColor: colors.primaryDark,
+              backgroundColor: 'var(--zb-button-primary-hover)',
+              color: 'var(--zb-button-primary-text)',
             },
           },
-          '&.MuiButton-containedSecondary': {
-            backgroundColor: colors.dark,
+          '&.MuiButton-containedSecondary:not(.Mui-disabled), &.MuiButton-colorSecondary:not(.Mui-disabled)': {
+            backgroundColor: 'var(--zb-button-secondary)',
+            color: 'var(--zb-button-secondary-text)',
+            border: '1px solid var(--zb-button-secondary-border)',
             '&:hover': {
-              backgroundColor: colors.darkHover,
+              backgroundColor: 'var(--zb-button-secondary-hover)',
+              borderColor: 'var(--zb-button-secondary-hover-border)',
+              color: 'var(--zb-button-secondary-text)',
+            },
+          },
+          '&.MuiButton-containedError:not(.Mui-disabled)': {
+            backgroundColor: 'var(--zb-button-delete)',
+            color: 'var(--zb-button-delete-text)',
+            '&:hover': {
+              backgroundColor: 'var(--zb-button-delete-hover)',
             },
           },
         },
         outlined: {
-          borderColor: colors.borderDark,
-          '&:hover': {
-            backgroundColor: colors.bgGray,
-          },
-          '&.MuiButton-outlinedPrimary': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
+          '&:not(.Mui-disabled)': {
+            color: 'var(--zb-button-outlined-text)',
+            borderColor: 'var(--zb-button-outlined-border)',
             '&:hover': {
-              color: colors.textPrimary,
-              borderColor: colors.textSecondary,
-              backgroundColor: colors.bgGray,
+              color: 'var(--zb-button-outlined-text)',
+              backgroundColor: 'var(--zb-button-outlined-hover)',
+              borderColor: 'var(--zb-button-outlined-hover-border)',
             },
           },
-          '&.MuiButton-outlinedSecondary': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
+          '&.MuiButton-outlinedPrimary:not(.Mui-disabled), &.MuiButton-outlinedSecondary:not(.Mui-disabled), &.MuiButton-outlinedInherit:not(.Mui-disabled)': {
+            color: 'var(--zb-button-outlined-text)',
+            borderColor: 'var(--zb-button-outlined-border)',
             '&:hover': {
-              borderColor: colors.borderDark,
-              backgroundColor: colors.bgGray,
-            },
-          },
-          '&.MuiButton-outlinedInherit': {
-            color: colors.textSecondary,
-            borderColor: colors.borderDark,
-            '&:hover': {
-              borderColor: colors.borderDark,
-              backgroundColor: colors.bgGray,
+              color: 'var(--zb-button-outlined-text)',
+              borderColor: 'var(--zb-button-outlined-hover-border)',
+              backgroundColor: 'var(--zb-button-outlined-hover)',
             },
           },
         },
@@ -401,17 +455,20 @@ export const theme = createTheme({
         },
         sizeSmall: {
           padding: '6px 12px',
-          fontSize: '0.75rem',
-          borderRadius: 6,
+          fontSize: 'var(--zb-button-small-font-size)',
+          borderRadius: 'var(--zb-button-radius)',
         },
       },
     },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
           '&:hover': {
             backgroundColor: colors.bgGray,
+          },
+          '&.MuiIconButton-colorError': {
+            color: 'var(--zb-button-delete)',
           },
         },
       },
@@ -449,7 +506,7 @@ export const theme = createTheme({
         title: {
           fontSize: '0.875rem',
           fontWeight: 600,
-          color: colors.textPrimary,
+          color: 'var(--zb-text-primary)',
         },
       },
     },
@@ -483,18 +540,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: '16px 20px',
-          fontSize: '0.8125rem',
-          borderBottom: `1px solid ${colors.bgGray}`,
+          fontSize: 'var(--zb-table-font-size)',
+          borderBottom: '1px solid var(--zb-table-border)',
         },
         head: {
           fontWeight: 600,
-          fontSize: '0.6875rem',
+          fontSize: 'var(--zb-table-header-font-size)',
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
-          color: colors.textMuted,
-          backgroundColor: colors.bgLight,
+          color: 'var(--zb-table-header-text)',
+          backgroundColor: 'var(--zb-table-header)',
           padding: '14px 20px',
-          borderBottom: `1px solid ${colors.borderLight}`,
+          borderBottom: '1px solid var(--zb-table-border)',
         },
       },
     },
@@ -502,7 +559,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '&:hover': {
-            backgroundColor: colors.bgHover,
+            backgroundColor: 'var(--zb-table-row-hover)',
           },
           '&:last-child td': {
             borderBottom: 'none',
@@ -513,8 +570,8 @@ export const theme = createTheme({
     MuiTablePagination: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.bgLight,
-          borderTop: `1px solid ${colors.borderLight}`,
+          backgroundColor: 'var(--zb-table-header)',
+          borderTop: '1px solid var(--zb-table-border)',
         },
         toolbar: {
           padding: '16px 20px',
@@ -522,11 +579,24 @@ export const theme = createTheme({
         },
         selectLabel: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
         },
         displayedRows: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: 'var(--zb-pagination-selected)',
+            color: 'var(--zb-pagination-selected-text)',
+            '&:hover': {
+              backgroundColor: 'var(--zb-pagination-selected)',
+            },
+          },
         },
       },
     },
@@ -561,9 +631,9 @@ export const theme = createTheme({
               borderColor: colors.borderDark,
             },
             '&.Mui-focused fieldset': {
-              borderColor: colors.primary,
+              borderColor: 'var(--zb-brand)',
               borderWidth: 1,
-              boxShadow: `0 0 0 3px ${alpha(colors.primary, 0.1)}`,
+              boxShadow: '0 0 0 3px var(--zb-brand-glow)',
             },
           },
           '& .MuiInputBase-input': {
@@ -571,7 +641,7 @@ export const theme = createTheme({
             fontSize: '0.875rem',
           },
           '& .MuiInputBase-input::placeholder': {
-            color: colors.textMuted,
+            color: 'var(--zb-text-muted)',
             opacity: 1,
           },
         },
@@ -588,9 +658,9 @@ export const theme = createTheme({
             borderColor: colors.borderDark,
           },
           '&.Mui-focused fieldset': {
-            borderColor: colors.primary,
+            borderColor: 'var(--zb-brand)',
             borderWidth: 1,
-            boxShadow: `0 0 0 3px ${alpha(colors.primary, 0.1)}`,
+            boxShadow: '0 0 0 3px var(--zb-brand-glow)',
           },
         },
         input: {
@@ -617,7 +687,7 @@ export const theme = createTheme({
         root: {
           color: colors.borderDark,
           '&.Mui-checked': {
-            color: colors.primary,
+            color: 'var(--zb-brand)',
           },
         },
       },
@@ -632,7 +702,7 @@ export const theme = createTheme({
           padding: '10px 20px',
           color: colors.textSecondary,
           '&.Mui-selected': {
-            color: colors.textPrimary,
+            color: 'var(--zb-text-primary)',
           },
         },
       },
@@ -644,7 +714,7 @@ export const theme = createTheme({
         },
         indicator: {
           height: 2,
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
         },
       },
     },
@@ -661,7 +731,7 @@ export const theme = createTheme({
           backgroundColor: 'transparent',
           '&.Mui-selected': {
             backgroundColor: colors.bgWhite,
-            color: colors.textPrimary,
+            color: 'var(--zb-text-primary)',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
             '&:hover': {
               backgroundColor: colors.bgWhite,
@@ -733,7 +803,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '0.8125rem',
-          color: colors.textMuted,
+          color: 'var(--zb-text-muted)',
         },
         separator: {
           margin: '0 8px',
@@ -743,7 +813,7 @@ export const theme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-          color: colors.primary,
+          color: 'var(--zb-brand)',
           textDecoration: 'none',
           fontWeight: 500,
           '&:hover': {
@@ -759,7 +829,7 @@ export const theme = createTheme({
           height: 32,
           fontSize: '0.75rem',
           fontWeight: 600,
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           color: colors.bgWhite,
         },
       },
@@ -826,7 +896,7 @@ export const theme = createTheme({
           borderRadius: 4,
         },
         bar: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           borderRadius: 4,
         },
       },
@@ -847,9 +917,9 @@ export const theme = createTheme({
           },
         },
         primary: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'var(--zb-brand)',
           '&:hover': {
-            backgroundColor: colors.primaryDark,
+            backgroundColor: 'var(--zb-brand-dark)',
           },
         },
         secondary: {
@@ -878,9 +948,9 @@ export const theme = createTheme({
             backgroundColor: colors.bgHover,
           },
           '&.Mui-selected': {
-            backgroundColor: colors.primaryBg,
+            backgroundColor: 'var(--zb-brand-bg)',
             '&:hover': {
-              backgroundColor: colors.primaryBg,
+              backgroundColor: 'var(--zb-brand-bg)',
             },
           },
         },

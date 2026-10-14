@@ -46,7 +46,7 @@
   },
   "actions": {
     "upload": "Upload DMN",
-    "design": "Design Decision",
+    "newDecision": "New Decision",
     "evaluate": "Evaluate",
     "editDefinition": "Open In Editor"
   },

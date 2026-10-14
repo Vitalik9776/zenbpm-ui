@@ -5,7 +5,7 @@ import { ns } from '@base/i18n';
 import { Box, Button, Snackbar, Alert } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import AddIcon from '@mui/icons-material/Add';
 import { PageHeader } from '@components/PageHeader';
 import { SubTabs, type SubTab } from '@components/SubTabs';
 import { DecisionDefinitionsTab } from './tabs/DecisionDefinitionsTab';
@@ -98,7 +98,8 @@ export const DecisionsPage = () => {
   const actions = (
     <>
       <Button
-        variant="outlined"
+        variant="contained"
+        color="secondary"
         size="small"
         startIcon={<RefreshIcon />}
         onClick={handleRefresh}
@@ -121,11 +122,11 @@ export const DecisionsPage = () => {
         variant="contained"
         color="secondary"
         size="small"
-        startIcon={<EditNoteIcon />}
+        startIcon={<AddIcon />}
         onClick={handleDesignDecision}
         data-testid="design-button"
       >
-        {t('decisions:actions.design')}
+        {t('decisions:actions.newDecision', 'New Decision')}
       </Button>
     </>
   );

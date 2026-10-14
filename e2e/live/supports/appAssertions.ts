@@ -15,9 +15,11 @@ export async function expectAppShell(page: Page): Promise<void> {
   const header = page.locator('header');
   await expect(header.getByText('ZenBPM', { exact: true })).toBeVisible();
 
-  for (const item of ['Processes', 'Decisions', 'Design']) {
+  for (const item of ['Processes', 'Decisions']) {
     await expect(header.getByRole('button', { name: item, exact: true })).toBeEnabled();
   }
+
+  await expect(header.getByRole('button', { name: 'Design', exact: true })).toHaveCount(0);
 
   await expect(header.getByText('JD', { exact: true })).toBeVisible();
 
@@ -48,13 +50,12 @@ export async function expectManagementActions(
     ? [
         ['refresh-button', 'Refresh'],
         ['upload-button', 'Upload BPMN'],
-        ['design-button', 'Design Process'],
-        ['start-instance-button', 'Start Instance'],
+        ['design-button', 'New Process'],
       ]
     : [
         ['refresh-button', 'Refresh'],
         ['upload-button', 'Upload DMN'],
-        ['design-button', 'Design Decision'],
+        ['design-button', 'New Decision'],
       ];
 
   for (const [testId, label] of actions) {

@@ -53,7 +53,7 @@
   "actions": {
     "create": "Create Process",
     "upload": "Upload BPMN",
-    "design": "Design Process",
+    "newProcess": "New Process",
     "deploy": "Deploy",
     "startInstance": "Start Instance",
     "editDefinition": "Open In Editor",

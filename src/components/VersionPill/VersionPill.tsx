@@ -1,5 +1,4 @@
 import { Box, type SxProps, type Theme } from '@mui/material';
-import { themeColors } from '../../base/theme';
 
 interface VersionPillProps {
   version: number | string;
@@ -21,8 +20,8 @@ export const VersionPill = ({ version, size = 'small', sx, withoutVPrefix }: Ver
         borderRadius: '100px',
         fontSize: isSmall ? '0.6875rem' : '0.75rem',
         fontWeight: 600,
-        backgroundColor: themeColors.successBg,
-        color: themeColors.successText,
+        backgroundColor: 'var(--zb-badge-soft)',
+        color: 'var(--zb-badge-soft-text)',
         whiteSpace: 'nowrap',
         ...sx,
       }}

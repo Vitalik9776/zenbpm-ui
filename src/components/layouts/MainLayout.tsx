@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { ns } from '@base/i18n';
 import { useAuth } from '@base/auth';
+import { brandingQueryKey, defaultBranding, getBranding } from '@base/branding';
 import {
   AppBar,
   Avatar,
@@ -47,9 +49,13 @@ interface LogoProps {
   showText?: boolean;
   onClick: () => void;
   appName: string;
+  textColor: string;
+  logoUrl: string | null;
+  brandColor: string;
+  headerHover: string;
 }
 
-const Logo = ({ showText = true, onClick, appName }: LogoProps) => (
+const Logo = ({ showText = true, onClick, appName, textColor, logoUrl, brandColor, headerHover }: LogoProps) => (
   <Box
     sx={{
       display: 'flex',
@@ -57,35 +63,54 @@ const Logo = ({ showText = true, onClick, appName }: LogoProps) => (
       gap: 1.25,
       cursor: 'pointer',
       flexShrink: 0,
+      borderRadius: 1,
+      '&:hover': {
+        bgcolor: headerHover,
+      },
     }}
     onClick={onClick}
   >
-    {/* Green dot */}
-    <Box
-      sx={{
-        width: 8,
-        height: 8,
-        bgcolor: 'primary.main',
-        borderRadius: '50%',
-      }}
-    />
-    {showText && (
-      <Typography
-        sx={{
-          fontWeight: 700,
-          fontSize: '1.125rem',
-          color: 'text.primary',
-          letterSpacing: '-0.5px',
-        }}
-      >
-        {appName}
-      </Typography>
+    {logoUrl ? (
+      <Box
+        component="img"
+        src={logoUrl}
+        alt={appName}
+        data-testid="header-logo"
+        sx={{ height: 32, maxWidth: 180, objectFit: 'contain' }}
+      />
+    ) : (
+      <>
+        <Box
+          sx={{
+            width: 8,
+            height: 8,
+            bgcolor: brandColor,
+            borderRadius: '50%',
+          }}
+        />
+        {showText && (
+          <Typography
+            sx={{
+              fontWeight: 700,
+              fontSize: '1.125rem',
+              color: textColor,
+              letterSpacing: '-0.5px',
+            }}
+          >
+            {appName}
+          </Typography>
+        )}
+      </>
     )}
   </Box>
 );
 
 export const MainLayout = () => {
   const { t } = useTranslation([ns.common, ns.auth]);
+  const { data: branding = defaultBranding } = useQuery({
+    queryKey: brandingQueryKey,
+    queryFn: getBranding,
+  });
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -140,12 +165,21 @@ export const MainLayout = () => {
 
   const appName = t('appName');
   const handleLogoClick = () => handleNavClick('/');
+  const headerBackground = branding.headerBackground;
+  const headerTextColor = branding.headerTextColor;
+  const logoProps = {
+    appName,
+    textColor: headerTextColor,
+    logoUrl: branding.logoUrl,
+    brandColor: branding.brandColor,
+    headerHover: branding.headerHover,
+  };
 
   // Mobile drawer content
   const mobileDrawerContent = (
     <Box sx={{ width: 280 }}>
-      <Toolbar sx={{ px: 2.5 }}>
-        <Logo onClick={handleLogoClick} appName={appName} />
+      <Toolbar sx={{ px: 2.5, bgcolor: headerBackground, color: headerTextColor }}>
+        <Logo onClick={handleLogoClick} {...logoProps} />
       </Toolbar>
       <List>
         {navItems.map((item) => (
@@ -155,28 +189,40 @@ export const MainLayout = () => {
               onClick={() => handleNavClick(item.path)}
               sx={{
                 mx: 1.5,
-                borderRadius: 1,
+                borderRadius: `${branding.menuRadius}px`,
+                color: isActivePath(item.path) ? branding.menuActiveColor : branding.menuInactiveColor,
+                bgcolor: isActivePath(item.path) ? branding.menuActiveBackground : 'transparent',
+                '&:hover': {
+                  bgcolor: isActivePath(item.path)
+                    ? branding.menuActiveHoverBackground
+                    : branding.menuInactiveHoverBackground,
+                  color: isActivePath(item.path) ? branding.menuActiveHoverColor : branding.menuInactiveHoverColor,
+                },
                 '&.Mui-selected': {
-                  bgcolor: 'primary.light',
-                  color: 'primary.dark',
-                  '& .MuiListItemIcon-root': {
-                    color: 'primary.dark',
-                  },
+                  bgcolor: branding.menuActiveBackground,
+                  color: branding.menuActiveColor,
                   '&:hover': {
-                    bgcolor: 'primary.light',
+                    bgcolor: branding.menuActiveHoverBackground,
+                    color: branding.menuActiveHoverColor,
                   },
+                },
+                '& .MuiListItemIcon-root, & .MuiTypography-root': {
+                  color: 'inherit',
                 },
               }}
             >
-              <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>
+              <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText
                 primary={t(item.labelKey)}
                 slotProps={{
                   primary: {
-                    fontSize: '0.875rem',
-                    fontWeight: 500,
+                    sx: {
+                      fontSize: `${branding.menuFontSize}px`,
+                      fontWeight: isActivePath(item.path) ? branding.menuActiveFontWeight : branding.menuFontWeight,
+                      color: 'inherit',
+                    },
                   },
                 }}
               />
@@ -190,7 +236,14 @@ export const MainLayout = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Header */}
-      <AppBar position="sticky">
+      <AppBar
+        position="sticky"
+        sx={{
+          bgcolor: headerBackground,
+          color: headerTextColor,
+          borderBottom: `1px solid ${branding.headerBorder}`,
+        }}
+      >
         <Toolbar
           sx={{
             gap: 6,
@@ -205,14 +258,18 @@ export const MainLayout = () => {
                 color="inherit"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: -1 }}
+                sx={{
+                  mr: -1,
+                  color: headerTextColor,
+                  '&:hover': { bgcolor: branding.headerHover },
+                }}
               >
                 <MenuIcon />
               </IconButton>
             )}
 
             {/* Logo */}
-            <Logo showText={!isMobile || !mobileOpen} onClick={handleLogoClick} appName={appName} />
+            <Logo showText={!isMobile || !mobileOpen} onClick={handleLogoClick} {...logoProps} />
 
             {/* Desktop Navigation */}
             {!isMobile && (
@@ -229,17 +286,19 @@ export const MainLayout = () => {
                     onClick={() => handleNavClick(item.path)}
                     disableRipple
                     sx={{
-                      px: 0,
-                      py: 0.5,
+                      px: 1.5,
+                      py: 0.75,
                       minWidth: 'auto',
-                      color: isActivePath(item.path) ? 'text.primary' : 'text.secondary',
-                      fontWeight: 500,
-                      fontSize: '0.875rem',
-                      borderRadius: 0,
-                      bgcolor: 'transparent',
+                      color: isActivePath(item.path) ? branding.menuActiveColor : branding.menuInactiveColor,
+                      fontWeight: isActivePath(item.path) ? branding.menuActiveFontWeight : branding.menuFontWeight,
+                      fontSize: `${branding.menuFontSize}px`,
+                      borderRadius: `${branding.menuRadius}px`,
+                      bgcolor: isActivePath(item.path) ? branding.menuActiveBackground : 'transparent',
                       '&:hover': {
-                        bgcolor: 'transparent',
-                        color: 'text.primary',
+                        bgcolor: isActivePath(item.path)
+                          ? branding.menuActiveHoverBackground
+                          : branding.menuInactiveHoverBackground,
+                        color: isActivePath(item.path) ? branding.menuActiveHoverColor : branding.menuInactiveHoverColor,
                       },
                     }}
                   >
@@ -250,29 +309,9 @@ export const MainLayout = () => {
             )}
           </Box>
 
-          {/* Right section: Design button, reserved search space and Avatar */}
+          {/* Right section: reserved search space and Avatar */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
-            {/* Design Button */}
-            <Button
-              onClick={() => handleNavClick('/designer')}
-              sx={{
-                bgcolor: 'primary.main',
-                color: 'white',
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                px: 2,
-                py: 0.75,
-                borderRadius: 1,
-                textTransform: 'none',
-                '&:hover': {
-                  bgcolor: 'primary.dark',
-                },
-              }}
-            >
-              {t('navigation.design')}
-            </Button>
-
-            {/* Keep the Design button aligned while global search is unavailable. */}
+            {/* Keep header spacing while global search is unavailable. */}
             <Box
               aria-hidden="true"
               data-testid="header-search-spacer"
@@ -281,11 +320,24 @@ export const MainLayout = () => {
 
             {/* Avatar + User Menu */}
             <Avatar
-              onClick={user ? (e) => setUserMenuAnchor(e.currentTarget) : undefined}
+              data-testid="header-profile"
+              role={user ? 'button' : undefined}
+              tabIndex={user ? 0 : undefined}
+              onClick={user ? (event) => setUserMenuAnchor(event.currentTarget) : undefined}
+              onKeyDown={
+                user
+                  ? (event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        setUserMenuAnchor(event.currentTarget);
+                      }
+                    }
+                  : undefined
+              }
               sx={{
                 width: 32,
                 height: 32,
-                bgcolor: 'primary.main',
+                bgcolor: branding.brandColor,
                 fontSize: '0.75rem',
                 fontWeight: 600,
                 cursor: user ? 'pointer' : 'default',

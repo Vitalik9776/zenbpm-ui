@@ -2,14 +2,12 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ns } from '@base/i18n';
-import { Box, Button, Snackbar, Alert, Link } from '@mui/material';
+import { Box, Button, Snackbar, Alert } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import AddIcon from '@mui/icons-material/Add';
 import { PageHeader } from '@components/PageHeader';
 import { SubTabs, type SubTab } from '@components/SubTabs';
-import { useStartInstanceDialog } from '@components/StartInstanceDialog';
 import { ProcessDefinitionsTab } from './tabs/ProcessDefinitionsTab';
 import { ProcessInstancesTab } from './tabs/ProcessInstancesTab';
 import { createProcessDefinition } from '@base/openapi';
@@ -23,12 +21,9 @@ export const ProcessesPage = () => {
   const { tab } = useParams<{ tab?: string }>();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { openStartInstance } = useStartInstanceDialog();
-
   // Shared state
   const [refreshKey, setRefreshKey] = useState(0);
   const [uploading, setUploading] = useState(false);
-  const [createdInstanceKey, setCreatedInstanceKey] = useState<string | null>(null);
   const [snackbar, setSnackbar] = useState<{
     open: boolean;
     message: string;
@@ -99,26 +94,12 @@ export const ProcessesPage = () => {
     void navigate('/designer/process');
   }, [navigate]);
 
-  const handleInstanceCreated = useCallback((instanceKey: string) => {
-    setCreatedInstanceKey(instanceKey);
-    setSnackbar({
-      open: true,
-      message: t('processes:messages.instanceCreated'),
-      severity: 'success',
-    });
-    // Refresh instances tab if currently viewing it
-    setRefreshKey((k) => k + 1);
-  }, [t]);
-
-  const handleStartInstance = useCallback(() => {
-    openStartInstance({ onSuccess: handleInstanceCreated });
-  }, [openStartInstance, handleInstanceCreated]);
-
   // Actions displayed next to tabs
   const actions = (
     <>
       <Button
-        variant="outlined"
+        variant="contained"
+        color="secondary"
         size="small"
         startIcon={<RefreshIcon />}
         onClick={handleRefresh}
@@ -141,21 +122,11 @@ export const ProcessesPage = () => {
         variant="contained"
         color="secondary"
         size="small"
-        startIcon={<EditNoteIcon />}
+        startIcon={<AddIcon />}
         onClick={handleDesignProcess}
         data-testid="design-button"
       >
-        {t('processes:actions.design')}
-      </Button>
-      <Button
-        variant="contained"
-        color="secondary"
-        size="small"
-        startIcon={<PlayArrowIcon />}
-        onClick={handleStartInstance}
-        data-testid="start-instance-button"
-      >
-        {t('processes:actions.startInstance')}
+        {t('processes:actions.newProcess', 'New Process')}
       </Button>
     </>
   );
@@ -188,31 +159,15 @@ export const ProcessesPage = () => {
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}
-        onClose={() => {
-          setSnackbar({ ...snackbar, open: false });
-          setCreatedInstanceKey(null);
-        }}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Alert
-          onClose={() => {
-            setSnackbar({ ...snackbar, open: false });
-            setCreatedInstanceKey(null);
-          }}
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
           severity={snackbar.severity}
           sx={{ width: '100%' }}
         >
           {snackbar.message}
-          {createdInstanceKey && (
-            <Link
-              component="button"
-              variant="body2"
-              onClick={() => void navigate(`/process-instances/${createdInstanceKey}`)}
-              sx={{ ml: 1, color: 'inherit', textDecoration: 'underline' }}
-            >
-              {t('processes:actions.viewInstance')}
-            </Link>
-          )}
         </Alert>
       </Snackbar>
     </Box>
