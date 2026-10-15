@@ -25,6 +25,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import RuleIcon from '@mui/icons-material/Rule';
@@ -50,7 +51,6 @@ interface LogoProps {
   onClick: () => void;
   appName: string;
   textColor: string;
-  mutedColor: string;
   logoUrl: string | null;
   brandColor: string;
   headerHover: string;
@@ -61,7 +61,6 @@ const Logo = ({
   onClick,
   appName,
   textColor,
-  mutedColor,
   logoUrl,
   brandColor,
   headerHover,
@@ -97,7 +96,7 @@ const Logo = ({
             sx={{
               fontSize: '0.625rem',
               lineHeight: 1.2,
-              color: mutedColor,
+              color: alpha(textColor, 0.75),
               whiteSpace: 'nowrap',
             }}
           >
@@ -197,7 +196,6 @@ export const MainLayout = () => {
   const logoProps = {
     appName,
     textColor: headerTextColor,
-    mutedColor: branding.textMuted,
     logoUrl: branding.logoUrl,
     brandColor: branding.brandColor,
     headerHover: branding.headerHover,
