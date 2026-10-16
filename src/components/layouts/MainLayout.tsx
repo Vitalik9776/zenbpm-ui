@@ -25,7 +25,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { alpha } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import RuleIcon from '@mui/icons-material/Rule';
@@ -96,7 +95,7 @@ const Logo = ({
             sx={{
               fontSize: '0.625rem',
               lineHeight: 1.2,
-              color: alpha(textColor, 0.75),
+              color: textColor,
               whiteSpace: 'nowrap',
             }}
           >
